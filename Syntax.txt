@@ -1,0 +1,23 @@
+KEYWORDS(Procedural):
+//: Comment
+ACT [name]([params]): Action
+IF([booleanExpression]){: If statement
+ELSE{: Else statement
+VAR: Variable
+
+KEYWORDS(OOP):
+CLASS [name]{: Class
+OBJ [name]: Object
+INHERITS [name]: Inheritance
+
+OPERATORS:
++: Addition
+-: Subtraction
+*: Multiplication
+/: Division
+=: Assignment
+==: Equality Check
+!=: Not equal to
+AND: And operator
+OR: Or operator
+
