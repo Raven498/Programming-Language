@@ -12,14 +12,17 @@ public class Executor{
     Arrays.asList(this.getClass().getDeclaredMethods())
   );
 
+  ArrayList<StrVar> strVarList = new ArrayList<>();
+/*
   public Executor(){
+    System.out.println(actionRef);
     for(Method method : actionRef){
       if(method.getName() == "execute"){
         actionRef.remove(actionRef.indexOf(method));
       }
     }
   }
-
+*/
   public void execute(ArrayList<String> codeTokens, Executor executor){
     for(int i = 0; i < codeTokens.size(); i++){
       for(int j = 0; j < tokenRef.size(); j++){
@@ -30,6 +33,7 @@ public class Executor{
             if(method.getName().equals(tokenRef.get(j).toLowerCase())){
               try{
                 method.invoke(executor, params);
+                break;
               } catch(Exception e){
                 System.out.println("An error occurred.");
                 System.out.println(e.getClass().getSimpleName());
@@ -42,10 +46,48 @@ public class Executor{
   } //method end
 
   public void print(String item){
-    System.out.println(item);
+    StrVar strVar = findVar(item);
+    if(strVar != null){
+      System.out.println(strVar.getValue());
+    }
+    else{
+      System.out.println(item);
+    }
   }
 
-  public void var(String varName){
-    System.out.println(varName);
+  public void var(String varParams){
+    //Copy variable name,  value
+    char[] paramArray = varParams.toCharArray();
+    String varName = "";
+    String value = "";
+    boolean processValue = false;
+    for(char item : paramArray){
+      if(item == '='){
+        processValue = true;
+        continue;
+      }
+      if(processValue){
+        value = value + item;
+      }
+      else{
+        varName = varName + item;
+      }
+    }
+    
+    //Create variable
+    StrVar strVar = new StrVar();
+    strVar.setName(varName);
+    strVar.setValue(value);
+    strVarList.add(strVar);
+  }
+
+  //Internal method used for finding variables
+  private StrVar findVar(String varName){
+    for(StrVar strVar : strVarList){
+      if(strVar.getName().equals(varName)){
+        return strVar;
+      }
+    }
+    return null;
   }
 }

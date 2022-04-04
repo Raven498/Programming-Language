@@ -4,9 +4,6 @@ public class Main{
     Lexer lexer = new Lexer();
     Parser parser = new Parser();
     Executor executor = new Executor();
-    ArrayList<String> processedCode = lexer.lex();
-    ArrayList<String> codeTokens = parser.parse(processedCode);
-    
-    executor.execute(codeTokens, executor);
+    lexer.lex(parser, executor);
   }
 }

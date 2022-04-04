@@ -9,7 +9,7 @@ public class Parser{
   );
   ArrayList<String> blockCode = new ArrayList<String>();
   
-  public ArrayList<String> parse(ArrayList<String> processedCode){
+  public void parse(ArrayList<String> processedCode, Executor executor){
     for(int i = 0; i < processedCode.size(); i++){
       String currentToken = processedCode.get(i);
       //String Processing
@@ -36,7 +36,8 @@ public class Parser{
       }
       codeTokens.add(currentToken);
     }
-    return codeTokens;
+    executor.execute(codeTokens, executor);
+    codeTokens.clear();
   }
 
   private void processBlock(ArrayList<String> processedCode, int currentIndex){

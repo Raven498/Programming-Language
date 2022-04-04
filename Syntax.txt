@@ -20,4 +20,3 @@ OPERATORS:
 !=: Not equal to
 AND: And operator
 OR: Or operator
-
