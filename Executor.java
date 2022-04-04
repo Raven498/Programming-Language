@@ -37,12 +37,16 @@ public class Executor{
   } //method end
 
   public void print(String item){
-    StrVar strVar = findVar(item);
-    if(strVar != null){
-      System.out.println(strVar.getValue());
-    }
-    else{
-      System.out.println(item);
+    Scanner itemScanner = new Scanner(item);
+    while(itemScanner.hasNext()){
+      String printItem = itemScanner.next();
+      StrVar strVar = findVar(printItem);
+      if(strVar != null){
+        System.out.print(strVar.getValue());
+      }
+      else{
+        System.out.print(printItem);
+      }
     }
   }
 

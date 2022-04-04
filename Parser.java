@@ -29,6 +29,16 @@ public class Parser{
         }
       }
 
+      if(currentToken.contains("+")){
+        String token1 = processedCode.get(i - 1);
+        String token2 = processedCode.get(i + 1);
+        currentToken = token1 + " " + token2;
+        codeTokens.add(currentToken);
+        codeTokens.remove(token1);
+        i += 2;
+        continue;
+      }
+
       //Block Processing
       if(blockRef.contains(processedCode.get(i))){
         processBlock(processedCode, i);
