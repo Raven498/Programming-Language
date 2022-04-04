@@ -11,8 +11,8 @@ OBJ [name]: Object
 INHERITS [name]: Inheritance
 
 OPERATORS:
-+: Addition
--: Subtraction
++: Addition/Concatenation
+-: Subtraction/Deconcatenation
 *: Multiplication
 /: Division
 =: Assignment
@@ -20,3 +20,13 @@ OPERATORS:
 !=: Not equal to
 AND: And operator
 OR: Or operator
+
+SYNTAX UPDATES:
+1. Quotes - Use single quotes for strings ('')
+  - Not needed for strings without whitespace, but can be used for clarity
+  - ex. PRINT hello (same thing as PRINT 'hello')
+2. Whitespace - does not affect program functionality
+3. String mutability - strings are mutable.
+4. Deconcatenation - subtracts one string from another
+  - ex. 'helloiamhuman' - 'iamhuman' = 'hello'
+  - Removes characters in the order specified - if the string isn't found, the original string will not change.

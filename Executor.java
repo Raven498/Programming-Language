@@ -13,16 +13,7 @@ public class Executor{
   );
 
   ArrayList<StrVar> strVarList = new ArrayList<>();
-/*
-  public Executor(){
-    System.out.println(actionRef);
-    for(Method method : actionRef){
-      if(method.getName() == "execute"){
-        actionRef.remove(actionRef.indexOf(method));
-      }
-    }
-  }
-*/
+
   public void execute(ArrayList<String> codeTokens, Executor executor){
     for(int i = 0; i < codeTokens.size(); i++){
       for(int j = 0; j < tokenRef.size(); j++){

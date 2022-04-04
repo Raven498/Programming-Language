@@ -1,2 +1,9 @@
-VAR yeet='bro wtf is this bro'
-PRINT yeet
+VAR displayMessage='Data retrieved!'
+VAR errorMessage='Error during data retrieval'
+VAR displayPrefix='Display Message: '
+VAR errorPrefix='Error Message: '
+
+PRINT displayPrefix
+PRINT displayMessage
+PRINT errorPrefix
+PRINT errorMessage
