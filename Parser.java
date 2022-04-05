@@ -21,18 +21,19 @@ public class Parser{
         currentToken = currentToken.replace("'", "");
 
         //Process string, get new index
-        i = processString(processedCode, currentToken, i+1);
+        i = processString(processedCode, currentToken, i+1) - 1; //Subtract one because of the increment at the top
 
         //If new index is out of bounds, break
         if(i >= processedCode.size()){
           break;
         }
+        continue;
       }
 
       if(currentToken.contains("+")){
-        String token1 = processedCode.get(i - 1);
+        String token1 = processedCode.get(i - 1); //Potential bug: may have to use codeTokens instead
         String token2 = processedCode.get(i + 1);
-        currentToken = token1 + " " + token2;
+        currentToken = token1 + "+" + token2;
         codeTokens.add(currentToken);
         codeTokens.remove(token1);
         i += 2;

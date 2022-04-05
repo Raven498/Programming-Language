@@ -37,16 +37,24 @@ public class Executor{
   } //method end
 
   public void print(String item){
-    Scanner itemScanner = new Scanner(item);
-    while(itemScanner.hasNext()){
-      String printItem = itemScanner.next();
-      StrVar strVar = findVar(printItem);
-      if(strVar != null){
-        System.out.print(strVar.getValue());
+    char[] itemArray = item.toCharArray();
+    ArrayList<String> printItems = new ArrayList<>();
+    String tempStr = "";
+    for(int i = 0; i < itemArray.length; i++){
+      if(itemArray[i] == '+') {
+        System.out.println("Ending round!"); //DEBUG
+        printItems.add(tempStr);
+        tempStr = "";
+        StrVar strVar = findVar(printItems.get(i));
+        if(strVar != null){
+          System.out.print(strVar.getValue());
+        }
+        else{
+          System.out.print(printItems.get(i));
+        }
+        continue;
       }
-      else{
-        System.out.print(printItem);
-      }
+      tempStr += itemArray[i];
     }
   }
 

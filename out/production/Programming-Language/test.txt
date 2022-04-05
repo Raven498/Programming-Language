@@ -1,1 +1,1 @@
-PRINT hello + hi
+PRINT 'yo whats up my dude ' + 'ayoo??'
