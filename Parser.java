@@ -31,8 +31,8 @@ public class Parser{
       }
 
       if(currentToken.contains("+")){
-        String token1 = processedCode.get(i - 1); //Potential bug: may have to use codeTokens instead
-        String token2 = processedCode.get(i + 1);
+        String token1 = codeTokens.get(1);
+        String token2 = processedCode.get(i + 1); //May need to use processString as well
         currentToken = token1 + "+" + token2;
         codeTokens.add(currentToken);
         codeTokens.remove(token1);

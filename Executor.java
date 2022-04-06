@@ -20,6 +20,7 @@ public class Executor{
         if(codeTokens.get(i).equals(tokenRef.get(j))){
           String params = codeTokens.get(i + 1);
           params = params.replace("}", "");
+          params = params.replace("'", "");
           for(Method method : actionRef){
             if(method.getName().equals(tokenRef.get(j).toLowerCase())){
               try{
@@ -41,16 +42,16 @@ public class Executor{
     ArrayList<String> printItems = new ArrayList<>();
     String tempStr = "";
     for(int i = 0; i < itemArray.length; i++){
-      if(itemArray[i] == '+') {
-        System.out.println("Ending round!"); //DEBUG
+      if(itemArray[i] == '+' || i == itemArray.length - 1) {
+        //System.out.println("Ending round!"); //DEBUG
         printItems.add(tempStr);
         tempStr = "";
-        StrVar strVar = findVar(printItems.get(i));
+        StrVar strVar = findVar(printItems.get(printItems.size() - 1));
         if(strVar != null){
           System.out.print(strVar.getValue());
         }
         else{
-          System.out.print(printItems.get(i));
+          System.out.print(printItems.get(printItems.size() - 1));
         }
         continue;
       }
