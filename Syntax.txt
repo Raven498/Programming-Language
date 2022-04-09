@@ -16,7 +16,7 @@ OPERATORS:
 *: Multiplication
 /: Division
 =: Assignment
-==: Equality Check
+?=: Equality Check
 !=: Not equal to
 AND: And operator
 OR: Or operator
@@ -30,3 +30,4 @@ SYNTAX UPDATES:
 4. Deconcatenation - subtracts one string from another
   - ex. 'helloiamhuman' - 'iamhuman' = 'hello'
   - Removes characters in the order specified - if the string isn't found, the original string will not change.
+5. Statements within a code block must be designated using the '>' symbol and a space after this symbol.

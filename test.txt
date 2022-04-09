@@ -1,2 +1,5 @@
 VAR name=Doofus
-PRINT name
+IF name ?= Doofus{
+> VAR signalText='You are a doofus!'
+> PRINT signalText
+}

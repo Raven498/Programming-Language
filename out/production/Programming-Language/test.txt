@@ -1,2 +1,3 @@
 VAR name=Doofus
-PRINT name
+VAR name2=Doofus2
+PRINT name + name2

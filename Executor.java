@@ -8,32 +8,58 @@ public class Executor{
     )
   );
 
+  ArrayList<String> blockRef = new ArrayList<>(
+          Arrays.asList(
+            "IF",
+            "ELSE",
+            "ACT"
+          )
+  );
+
   ArrayList<Method> actionRef = new ArrayList<>(
     Arrays.asList(this.getClass().getDeclaredMethods())
   );
 
   ArrayList<StrVar> strVarList = new ArrayList<>();
 
-  public void execute(ArrayList<String> codeTokens, Executor executor){
+  public void execute(ArrayList<String> codeTokens, ArrayList<String> blockTokens, Executor executor){
     for(int i = 0; i < codeTokens.size(); i++){
-      for(int j = 0; j < tokenRef.size(); j++){
-        if(codeTokens.get(i).equals(tokenRef.get(j))){
-          String params = codeTokens.get(i + 1);
-          params = params.replace("}", "");
-          params = params.replace("'", "");
-          for(Method method : actionRef){
-            if(method.getName().equals(tokenRef.get(j).toLowerCase())){
-              try{
-                method.invoke(executor, params);
-                break;
-              } catch(Exception e){
-                System.out.println("An error occurred.");
-                System.out.println(e.getClass().getSimpleName());
-              } //try/catch end
-            } //if end
-          } //actionRef for-each end
-        } //if end
-      } //tokenRef for end
+      if(blockTokens == null) {
+        for (int j = 0; j < tokenRef.size(); j++) {
+          if (codeTokens.get(i).contains(tokenRef.get(j))) {
+            String params = codeTokens.get(i + 1);
+            params = params.replace("'", "");
+            for (Method method : actionRef) {
+              if (tokenRef.get(j).toLowerCase().contains(method.getName())) {
+                try {
+                  method.invoke(executor, params);
+                  break;
+                } catch (Exception e) {
+                  System.out.println("An error occurred.");
+                  System.out.println(e.getClass().getSimpleName());
+                } //try/catch end
+              } //if end
+            } //actionRef for-each end
+          } //if end
+        } //tokenRef for end
+      } //blockTokens if end
+      else {
+        for (int j = 0; j < blockRef.size(); j++) {
+          if (codeTokens.get(i).contains(blockRef.get(j))) {
+            for (Method method : actionRef) {
+              if (blockRef.get(j).toLowerCase().contains(method.getName())) {
+                try {
+                  method.invoke(executor, blockTokens);
+                  break;
+                } catch (Exception e) {
+                  System.out.println("An error occurred.");
+                  System.out.println(e.getClass().getSimpleName());
+                } //try/catch end
+              } //method if end
+            } //method for end
+          } //codeTokens if end
+        } //for end
+      } //else end
     } //codeTokens for end
   } //method end
 
@@ -58,7 +84,6 @@ public class Executor{
     for(String outputItem : output){
       System.out.print(outputItem);
     }
-
   }
 
   public void var(String varParams){
@@ -85,6 +110,10 @@ public class Executor{
     strVar.setName(varName);
     strVar.setValue(value);
     strVarList.add(strVar);
+  }
+
+  public void ifelse(ArrayList<String> blockCde){
+
   }
 
   //Internal method used for finding variables

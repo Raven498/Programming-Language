@@ -6,6 +6,7 @@ public class Parser{
                   "IF", 
                    "ELSE")
   );
+  private char[] exemptCharRef = {'}', '>'};
   ArrayList<String> blockCode = new ArrayList<String>();
   
   public void parse(ArrayList<String> processedCode, Executor executor){
@@ -39,9 +40,9 @@ public class Parser{
         continue;
       }
 
-      //Block Processing
+      //Block Processing - WIP
       if(blockRef.contains(processedCode.get(i))){
-        processBlock(processedCode, i);
+        i = processBlock(processedCode, i);
         continue;
       }
       codeTokens.add(currentToken);
@@ -50,13 +51,20 @@ public class Parser{
     codeTokens.clear();
   }
 
-  private void processBlock(ArrayList<String> processedCode, int currentIndex){
-    for(int i = currentIndex; i < processedCode.size(); i++){
-      codeTokens.add(processedCode.get(i));
+  //WIP - implementing block processing
+  private int processBlock(ArrayList<String> processedCode, int currentIndex){
+    int i = currentIndex;
+    ArrayList<String> blockTokens = new ArrayList<>();
+    for(; i < processedCode.size(); i++){
+      if(processedCode.get(i).contains(">")){
+        continue;
+      }
+      blockTokens.add(processedCode.get(i));
       if(processedCode.get(i).contains("}")){
         break;
       }
     }
+    return i;
   }
 
   private int processString(ArrayList<String> processedCode, String currentToken, int currentIndex){
@@ -87,5 +95,15 @@ public class Parser{
     //Add processed string to codeTokens
     codeTokens.add(string);
     return currentIndex;
+  }
+
+  //Check if a character is exempt - if it is, parser will skip over the char
+  private boolean isExempt(char target){
+    for(char refChar : exemptCharRef){
+      if(refChar == target){
+        return true;
+      }
+    }
+    return false;
   }
 }
