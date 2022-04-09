@@ -39,24 +39,26 @@ public class Executor{
 
   public void print(String item){
     char[] itemArray = item.toCharArray();
-    ArrayList<String> printItems = new ArrayList<>();
-    String tempStr = "";
+    ArrayList<String> output = new ArrayList<>();
+    String charList = "";
     for(int i = 0; i < itemArray.length; i++){
-      if(itemArray[i] == '+' || i == itemArray.length - 1) {
-        //System.out.println("Ending round!"); //DEBUG
-        printItems.add(tempStr);
-        tempStr = "";
-        StrVar strVar = findVar(printItems.get(printItems.size() - 1));
+      charList += itemArray[i];
+      if(itemArray[i] == '+'|| i == itemArray.length - 1){
+        charList = charList.replace("+", "");
+        StrVar strVar = findVar(charList);
         if(strVar != null){
-          System.out.print(strVar.getValue());
+          output.add(strVar.getValue());
         }
-        else{
-          System.out.print(printItems.get(printItems.size() - 1));
+        else {
+          output.add(charList);
         }
-        continue;
+        charList = "";
       }
-      tempStr += itemArray[i];
     }
+    for(String outputItem : output){
+      System.out.print(outputItem);
+    }
+
   }
 
   public void var(String varParams){

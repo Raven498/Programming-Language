@@ -4,8 +4,7 @@ public class Parser{
   private ArrayList<String> blockRef = new ArrayList<>(
     Arrays.asList("ACT", 
                   "IF", 
-                   "ELSE",
-                   "VAR")
+                   "ELSE")
   );
   ArrayList<String> blockCode = new ArrayList<String>();
   

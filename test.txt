@@ -1,1 +1,2 @@
-PRINT 'yo whats up my dude ' + 'ayoo??'
+VAR name=Doofus
+PRINT name
